@@ -1,0 +1,91 @@
+{
+  "name": "storybook-react-rsbuild",
+  "version": "0.0.10",
+  "description": "Storybook for React and Rsbuild: Develop React components in isolation with Hot Reloading.",
+  "keywords": ["storybook", "rsbuild", "rspack", "react"],
+  "bugs": {
+    "url": "https://github.com/rspack-contrib/storybook-rsbuild/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rspack-contrib/storybook-rsbuild",
+    "directory": "packages/react-rsbuild"
+  },
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "node": "./dist/index.js",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    },
+    "./preset": {
+      "types": "./dist/preset.d.ts",
+      "require": "./dist/preset.js"
+    },
+    "./react-docs": {
+      "types": "./dist/react-docs.d.ts",
+      "require": "./dist/react-docs.js"
+    },
+    "./loaders/react-docgen-loader": {
+      "types": "./dist/loaders/react-docgen-loader.d.ts",
+      "require": "./dist/loaders/react-docgen-loader.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": ["dist/**/*", "README.md", "*.js", "*.d.ts", "!src/**/*"],
+  "scripts": {
+    "build": "pnpm run prep --optimized",
+    "check": "node --loader ../../scripts/node_modules/esbuild-register/loader.js -r ../../scripts/node_modules/esbuild-register/register.js ../../scripts/prepare/check.ts",
+    "prep": "node --loader ../../scripts/node_modules/esbuild-register/loader.js -r ../../scripts/node_modules/esbuild-register/register.js ../../scripts/prepare/bundle.ts",
+    "prepare": "pnpm run build"
+  },
+  "dependencies": {
+    "@storybook/react": "^8.2.1",
+    "@storybook/react-docgen-typescript-plugin": "^1.0.1",
+    "@types/node": "^18.0.0",
+    "find-up": "^5.0.0",
+    "magic-string": "^0.30.10",
+    "react-docgen": "^7.0.3",
+    "resolve": "^1.22.8",
+    "storybook-builder-rsbuild": "workspace:*",
+    "tsconfig-paths": "^4.2.0"
+  },
+  "devDependencies": {
+    "@rsbuild/core": "1.0.1-beta.0",
+    "@storybook/types": "^8.2.1",
+    "@types/resolve": "^1.20.6",
+    "add": "^2.0.6",
+    "storybook": "^8.2.1",
+    "typescript": "^5.3.2"
+  },
+  "peerDependencies": {
+    "@rsbuild/core": ">= 1.0.0-alpha.9",
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta",
+    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta",
+    "storybook": "^8.2.1",
+    "typescript": ">= 4.2.x"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bundler": {
+    "entries": [
+      "./src/index.ts",
+      "./src/preset.ts",
+      "./src/loaders/react-docgen-loader.ts"
+    ],
+    "platform": "node"
+  }
+}

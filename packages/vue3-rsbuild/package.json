@@ -1,0 +1,72 @@
+{
+  "name": "storybook-vue3-rsbuild",
+  "version": "0.0.10",
+  "description": "Storybook for Vue3 and Rsbuild: Develop React Component in isolation with Hot Reloading.",
+  "keywords": ["storybook", "rsbuild", "rspack", "vue3"],
+  "bugs": {
+    "url": "https://github.com/rspack-contrib/storybook-rsbuild/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rspack-contrib/storybook-rsbuild",
+    "directory": "packages/vue3-rsbuild"
+  },
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "node": "./dist/index.js",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    },
+    "./preset": {
+      "types": "./dist/preset.d.ts",
+      "require": "./dist/preset.js"
+    },
+    "./react-docs": {
+      "types": "./dist/react-docs.d.ts",
+      "require": "./dist/react-docs.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": ["dist/**/*", "README.md", "*.js", "*.d.ts", "!src/**/*"],
+  "scripts": {
+    "build": "pnpm run prep --optimized",
+    "check": "node --loader ../../scripts/node_modules/esbuild-register/loader.js -r ../../scripts/node_modules/esbuild-register/register.js ../../scripts/prepare/check.ts",
+    "prep": "node --loader ../../scripts/node_modules/esbuild-register/loader.js -r ../../scripts/node_modules/esbuild-register/register.js ../../scripts/prepare/bundle.ts",
+    "prepare": "pnpm run build"
+  },
+  "dependencies": {
+    "@storybook/vue3": "^8.2.1",
+    "storybook-builder-rsbuild": "workspace:*",
+    "vue-docgen-loader": "^1.5.1"
+  },
+  "devDependencies": {
+    "@rsbuild/core": "1.0.1-beta.0",
+    "@types/node": "^18.0.0",
+    "storybook": "^8.2.1",
+    "typescript": "^5.3.2"
+  },
+  "peerDependencies": {
+    "@rsbuild/core": ">= 1.0.0-alpha.9",
+    "storybook": "^8.2.1"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "bundler": {
+    "entries": ["./src/index.ts", "./src/preset.ts"],
+    "platform": "node"
+  }
+}
